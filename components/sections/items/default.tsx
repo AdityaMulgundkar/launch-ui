@@ -1,13 +1,16 @@
 import { ReactNode } from "react";
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import {
-  BlocksIcon,
-  EclipseIcon,
-  FastForwardIcon,
-  LanguagesIcon,
-  MonitorSmartphoneIcon,
-  RocketIcon,
-  ScanFaceIcon,
-  SquarePenIcon,
+  ClipboardCheckIcon,
+  PlaneIcon,
+  FileTextIcon,
+  CreditCardIcon,
+  LockIcon,
+  LayoutDashboardIcon,
+  VerifiedIcon,
+  ArrowRightIcon,
+  CheckCircleIcon,
+  DatabaseIcon,
 } from "lucide-react";
 
 import { Item, ItemIcon, ItemTitle, ItemDescription } from "../../ui/item";
@@ -26,50 +29,22 @@ interface ItemsProps {
 }
 
 export default function Items({
-  title = "Everything you need. Nothing you don't.",
+  title = "How It Works",
   items = [
     {
-      title: "Accessibility first",
-      description: "Fully WCAG 2.0 compliant, made with best a11y practices",
-      icon: <ScanFaceIcon className="size-5 stroke-1" />,
+      title: "1. Create a Task",
+      description: "Define mission parameters, set payment amount, and deploy the smart contract escrow",
+      icon: <FileTextIcon className="size-5 stroke-1" />,
     },
     {
-      title: "Responsive design",
-      description: "Looks and works great on any device and screen size",
-      icon: <MonitorSmartphoneIcon className="size-5 stroke-1" />,
+      title: "2. Complete the Mission",
+      description: "Connect your autonomous drone to execute the pre-defined mission parameters",
+      icon: <PlaneIcon className="size-5 stroke-1" />,
     },
     {
-      title: "Light and dark mode",
-      description:
-        "Seamless switching between color schemes, 6 themes included",
-      icon: <EclipseIcon className="size-5 stroke-1" />,
-    },
-    {
-      title: "Easy to customize",
-      description: "Flexible options to match your product or brand",
-      icon: <BlocksIcon className="size-5 stroke-1" />,
-    },
-    {
-      title: "Top-level performance",
-      description: "Made for lightning-fast load times and smooth interactions",
-      icon: <FastForwardIcon className="size-5 stroke-1" />,
-    },
-    {
-      title: "Production ready",
-      description: "Thoroughly tested and launch-prepared",
-      icon: <RocketIcon className="size-5 stroke-1" />,
-    },
-    {
-      title: "Made for localisation",
-      description:
-        "Easy to implement support for multiple languages and regions",
-      icon: <LanguagesIcon className="size-5 stroke-1" />,
-    },
-    {
-      title: "CMS friendly",
-      description:
-        "Built to work with your any headless content management system",
-      icon: <SquarePenIcon className="size-5 stroke-1" />,
+      title: "3. Submit Proof & Get Paid",
+      description: "Upload mission proof that's stored on Arweave, verify completion, and receive automatic payment",
+      icon: <CheckCircleIcon className="size-5 stroke-1" />,
     },
   ],
   className,
@@ -81,14 +56,19 @@ export default function Items({
           {title}
         </h2>
         {items !== false && items.length > 0 && (
-          <div className="grid auto-rows-fr grid-cols-2 gap-0 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+          <div className="grid auto-rows-fr grid-cols-1 gap-8 sm:grid-cols-3 sm:gap-12 w-full max-w-5xl">
             {items.map((item, index) => (
-              <Item key={index}>
-                <ItemTitle className="flex items-center gap-2">
-                  <ItemIcon>{item.icon}</ItemIcon>
-                  {item.title}
-                </ItemTitle>
-                <ItemDescription>{item.description}</ItemDescription>
+              <Item key={index} className="flex flex-col items-center text-center p-6 rounded-xl border border-border bg-card/50">
+                <div className="mb-4 p-3 rounded-full bg-primary/10">
+                  <ItemIcon className="text-primary">{item.icon}</ItemIcon>
+                </div>
+                <ItemTitle className="text-xl font-bold mb-2">{item.title}</ItemTitle>
+                <ItemDescription className="text-muted-foreground">{item.description}</ItemDescription>
+                {index < items.length - 1 && (
+                  <div className="hidden sm:flex absolute -right-6 top-1/2 transform -translate-y-1/2">
+                    <ArrowRightIcon className="size-4 text-muted-foreground" />
+                  </div>
+                )}
               </Item>
             ))}
           </div>

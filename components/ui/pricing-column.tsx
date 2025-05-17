@@ -28,9 +28,9 @@ export interface PricingColumnProps
   name: string;
   icon?: ReactNode;
   description: string;
-  price: number;
-  priceNote: string;
-  cta: {
+  price?: number;
+  priceNote?: string;
+  cta?: {
     variant: "glow" | "default";
     label: string;
     href: string;
@@ -75,28 +75,34 @@ export function PricingColumn({
             {description}
           </p>
         </div>
-        <div className="flex items-center gap-3 lg:flex-col lg:items-start xl:flex-row xl:items-center">
-          <div className="flex items-baseline gap-1">
-            <span className="text-muted-foreground text-2xl font-bold">$</span>
-            <span className="text-6xl font-bold">{price}</span>
+        {price !== undefined && (
+          <div className="flex items-center gap-3 lg:flex-col lg:items-start xl:flex-row xl:items-center">
+            <div className="flex items-baseline gap-1">
+              <span className="text-muted-foreground text-2xl font-bold">$</span>
+              <span className="text-6xl font-bold">{price}</span>
+            </div>
+            <div className="flex min-h-[40px] flex-col">
+              {price > 0 && (
+                <>
+                  <span className="text-sm">one-time payment</span>
+                  <span className="text-muted-foreground text-sm">
+                    plus local taxes
+                  </span>
+                </>
+              )}
+            </div>
           </div>
-          <div className="flex min-h-[40px] flex-col">
-            {price > 0 && (
-              <>
-                <span className="text-sm">one-time payment</span>
-                <span className="text-muted-foreground text-sm">
-                  plus local taxes
-                </span>
-              </>
-            )}
-          </div>
-        </div>
-        <Button variant={cta.variant} size="lg" asChild>
-          <Link href={cta.href}>{cta.label}</Link>
-        </Button>
-        <p className="text-muted-foreground min-h-[40px] max-w-[220px] text-sm">
-          {priceNote}
-        </p>
+        )}
+        {cta && (
+          <Button variant={cta.variant} size="lg" asChild>
+            <Link href={cta.href}>{cta.label}</Link>
+          </Button>
+        )}
+        {priceNote && (
+          <p className="text-muted-foreground min-h-[40px] max-w-[220px] text-sm">
+            {priceNote}
+          </p>
+        )}
         <hr className="border-input" />
       </div>
       <div>

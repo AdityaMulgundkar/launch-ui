@@ -1,7 +1,13 @@
-import { ReactNode } from "react";
+"use client";
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @next/next/no-img-element */
+import { ReactNode, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { Menu } from "lucide-react";
+import { useTheme } from "next-themes";
+import Image from "next/image";
 
 import Navigation from "../../ui/navigation";
 import { Button, type ButtonProps } from "../../ui/button";
@@ -39,27 +45,36 @@ interface NavbarProps {
 }
 
 export default function Navbar({
-  logo = <LaunchUI />,
-  name = "Launch UI",
-  homeUrl = siteConfig.url,
-  mobileLinks = [
-    { text: "Getting Started", href: siteConfig.url },
-    { text: "Components", href: siteConfig.url },
-    { text: "Documentation", href: siteConfig.url },
-  ],
-  actions = [
-    { text: "Sign in", href: siteConfig.url, isButton: false },
-    {
-      text: "Get Started",
-      href: siteConfig.url,
-      isButton: true,
-      variant: "default",
-    },
-  ],
-  showNavigation = true,
+  logo,
+  name = "DroneForce",
+  homeUrl = "/",
+  mobileLinks = [],
+  actions = [],
+  showNavigation = false,
   customNavigation,
   className,
 }: NavbarProps) {
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  // After mounting, we can safely show the logo based on the theme
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  const logoComponent = (
+    <div className="h-10 w-40 relative flex items-center">
+      {mounted ? (
+        <img 
+          src={resolvedTheme === 'dark' ? '/dfauto-logo-white.png' : '/dfauto-logo-black.png'}
+          alt="DroneForce Logo"
+          className="max-h-8 max-w-8 object-contain"
+        />
+      ) : (
+        <div className="animate-pulse bg-primary/10 w-full h-8 rounded"></div>
+      )}
+    </div>
+  );
   return (
     <header className={cn("sticky top-0 z-50 -mb-4 px-4 pb-4", className)}>
       <div className="fade-bottom bg-background/15 absolute left-0 h-24 w-full backdrop-blur-lg"></div>
@@ -68,12 +83,10 @@ export default function Navbar({
           <NavbarLeft>
             <a
               href={homeUrl}
-              className="flex items-center gap-2 text-xl font-bold"
+              className="flex items-center gap-2"
             >
-              {logo}
-              {name}
+              {logo || logoComponent}
             </a>
-            {showNavigation && (customNavigation || <Navigation />)}
           </NavbarLeft>
           <NavbarRight>
             {actions.map((action, index) =>
@@ -83,7 +96,13 @@ export default function Navbar({
                   variant={action.variant || "default"}
                   asChild
                 >
-                  <a href={action.href}>
+                  <a 
+                    href={action.href}
+                    {...(action.href.startsWith('http') || action.href.startsWith('mailto:') ? {
+                      target: "_blank",
+                      rel: "noopener noreferrer"
+                    } : {})}
+                  >
                     {action.icon}
                     {action.text}
                     {action.iconRight}
@@ -94,6 +113,10 @@ export default function Navbar({
                   key={index}
                   href={action.href}
                   className="hidden text-sm md:block"
+                  {...(action.href.startsWith('http') || action.href.startsWith('mailto:') ? {
+                    target: "_blank",
+                    rel: "noopener noreferrer"
+                  } : {})}
                 >
                   {action.text}
                 </a>
@@ -123,6 +146,10 @@ export default function Navbar({
                       key={index}
                       href={link.href}
                       className="text-muted-foreground hover:text-foreground"
+                      {...(link.href.startsWith('http') || link.href.startsWith('mailto:') ? {
+                        target: "_blank",
+                        rel: "noopener noreferrer"
+                      } : {})}
                     >
                       {link.text}
                     </a>

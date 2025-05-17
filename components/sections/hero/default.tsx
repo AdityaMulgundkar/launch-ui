@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { siteConfig } from "@/config/site";
 import { ReactNode } from "react";
 import { cn } from "@/lib/utils";
@@ -29,13 +30,13 @@ interface HeroProps {
 }
 
 export default function Hero({
-  title = "Give your big idea the design it deserves",
-  description = "Professionally designed blocks and templates built with React, Shadcn/ui and Tailwind that will help your product stand out.",
+  title = "Trustless Drone Missions. Verified On-Chain.",
+  description = "DroneForce is a decentralized platform for creating, completing, and verifying drone missions with smart contracts and immutable proof.",
   mockup = (
     <Screenshot
-      srcLight="/app-light.png"
-      srcDark="/app-dark.png"
-      alt="Launch UI app screenshot"
+      srcLight="/dfautopilot-screenshot-tiny.png"
+      srcDark="/dfautopilot-screenshot-tiny.png"
+      alt="DroneForce mission dashboard"
       width={1248}
       height={765}
       className="w-full"
@@ -44,24 +45,21 @@ export default function Hero({
   badge = (
     <Badge variant="outline" className="animate-appear">
       <span className="text-muted-foreground">
-        New version of Launch UI is out!
+        Decentralized Drone Protocol
       </span>
-      <a href={siteConfig.getStartedUrl} className="flex items-center gap-1">
-        Get started
-        <ArrowRightIcon className="size-3" />
-      </a>
     </Badge>
   ),
   buttons = [
     {
-      href: siteConfig.getStartedUrl,
-      text: "Get Started",
+      href: "https://app.dfautopilot.com",
+      text: "Launch App",
       variant: "default",
+      iconRight: <ArrowRightIcon className="ml-2 size-4" />,
     },
     {
-      href: siteConfig.links.github,
-      text: "Github",
-      variant: "glow",
+      href: "https://github.com/DF-AutoPilot",
+      text: "GitHub",
+      variant: "outline",
       icon: <Github className="mr-2 size-4" />,
     },
   ],
@@ -70,14 +68,14 @@ export default function Hero({
   return (
     <Section
       className={cn(
-        "fade-bottom overflow-hidden pb-0 sm:pb-0 md:pb-0",
+        "fade-bottom overflow-hidden py-0 sm:py-0 md:py-0",
         className,
       )}
     >
       <div className="max-w-container mx-auto flex flex-col gap-12 pt-16 sm:gap-24">
         <div className="flex flex-col items-center gap-6 text-center sm:gap-12">
           {badge !== false && badge}
-          <h1 className="animate-appear from-foreground to-foreground dark:to-muted-foreground relative z-10 inline-block bg-linear-to-r bg-clip-text text-4xl leading-tight font-semibold text-balance text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-8xl md:leading-tight">
+          <h1 className="animate-appear from-foreground to-foreground dark:to-muted-foreground relative z-10 inline-block bg-linear-to-r bg-clip-text text-4xl leading-tight font-semibold text-balance text-transparent drop-shadow-2xl sm:text-6xl sm:leading-tight md:text-6xl md:leading-tight">
             {title}
           </h1>
           <p className="text-md animate-appear text-muted-foreground relative z-10 max-w-[740px] font-medium text-balance opacity-0 delay-100 sm:text-xl">
@@ -92,7 +90,11 @@ export default function Hero({
                   size="lg"
                   asChild
                 >
-                  <a href={button.href}>
+                  <a
+                    href={button.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     {button.icon}
                     {button.text}
                     {button.iconRight}

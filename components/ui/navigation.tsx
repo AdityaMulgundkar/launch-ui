@@ -98,8 +98,8 @@ export default function Navigation({
     },
   ],
   logo = <LaunchUI />,
-  logoTitle = "Launch UI",
-  logoDescription = "Landing page template built with React, Shadcn/ui and Tailwind that you can copy/paste into your project.",
+  logoTitle = "DroneForce",
+  logoDescription = "DroneForce is a decentralized protocol that powers autonomous drone mission coordination, execution, and verification with transparent and secure transactions.",
   logoHref = siteConfig.url,
   introItems = [
     {
