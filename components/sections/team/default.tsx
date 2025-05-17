@@ -21,7 +21,7 @@ interface TeamProps {
 }
 
 export default function Team({
-  title = "Team & Credibility",
+  title = "Our Team",
   description = "Our team combines expertise in robotics, blockchain, and artificial intelligence to build the future of drone mission coordination.",
   members = [
     {

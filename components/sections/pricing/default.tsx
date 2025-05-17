@@ -57,7 +57,7 @@ export default function Pricing({
       features: [
         "Task creation and specification",
         "Automated mission execution",
-        "Real-time progress tracking",
+        "Task progress tracking",
         "Proof verification and payment settlement",
       ],
       variant: "glow",

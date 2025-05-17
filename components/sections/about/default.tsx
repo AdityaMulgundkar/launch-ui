@@ -36,7 +36,7 @@ export default function About({
               </div>
               <div className="flex flex-col items-center p-4 rounded-lg bg-card/30">
                 <ShieldCheckIcon className="h-8 w-8 mb-2 text-primary" />
-                <p className="text-sm text-center">Audited Smart Contracts</p>
+                <p className="text-sm text-center">Automated Smart Contracts</p>
               </div>
               <div className="flex flex-col items-center p-4 rounded-lg bg-card/30">
                 <ZapIcon className="h-8 w-8 mb-2 text-primary" />
